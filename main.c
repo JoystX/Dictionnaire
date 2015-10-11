@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define bool char // On crée le type Booléen
+#define TRUE 1
+#define FALSE 0
+
+typedef enum booleen booleen;
+enum booleen { False = 0, True = 1};  // Fin de la création du type Booléen
+
 typedef struct noeud{
 char car;
 struct noeud *PFG,*PFD;}*Dictionnaire;
@@ -8,6 +15,7 @@ struct noeud *PFG,*PFD;}*Dictionnaire;
 int main()
 {
     int choix;
+
     printf("Bienvenu sur Dictionnaire V2\n\n\n\n");
 
     printf("Choisissez votre option :\n\n");
@@ -59,3 +67,9 @@ int main()
 
 //Dictionnaire Creer_Dictionnaire {return Dictionnaire;}
 //Ajouter_Mot(Dictionaire dico1, Mot mot1) {return Dictionnaire;}
+//Supprimer_Mot(Dictionnaire dico1,Mot mot){return Dictionnaire;}
+//Appartient_Mot(Dictionnaire dico1, Mot mot1){reutrn boolen a}
+//Afficher_Dictionnaire
+//Vider_Dictionnaire(Dictionnaire dico1)
+//Save_Dictionnaire
+//Charger dictionnaire
