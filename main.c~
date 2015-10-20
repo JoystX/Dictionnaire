@@ -1,3 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define bool char // On crée le type Booléen
+#define TRUE 1
+#define FALSE 0
+
+typedef enum booleen booleen;
+enum booleen { False = 0, True = 1};  // Fin de la création du type Booléen
+
+typedef struct noeud{
+char car;
+struct noeud *PFG,*PFD;}*Dictionnaire;
+
 int main()
 {
     int choix;
@@ -40,7 +54,7 @@ int main()
         case 8: printf("D'accord, le programme se quitte \n");
         break;
 
-        default : printf("Veuillez entrer un message valide");
+        default :
             break;
 
     }
