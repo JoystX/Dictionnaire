@@ -5,11 +5,10 @@
 #define TRUE 1
 #define FALSE 0
 
-typedef enum Booleen Booleen;
-enum booleen { False = 0, True = 1};  // Fin de la création du type Booléen
+typedef enum { Faux , Vrai } Booleen;  // Fin de la création du type Booléen
 
 typedef struct noeud{
-	char Mot;
+	char lettre;
 	struct noeud *PFG,*PFD;
 	}*Dictionnaire;
 
