@@ -14,7 +14,7 @@ typedef struct noeud{
 	}*Dictionnaire;
 
 Dictionnaire Creer_Dictionnaire(void);
-Dictionnaire Ajouter_Mot(Dictionaire D, Mot M);
-Dictionnaire Supprimer_Mot(Dictionnaire D,Mot M);
-Booleen Appartient_Mot(Dictionnaire D,Mot M);
+Dictionnaire Ajouter_Mot(Dictionnaire D, char M[]);
+Dictionnaire Supprimer_Mot(Dictionnaire D,char M[]);
+Booleen Appartient_Mot(Dictionnaire D,char M[]);
 Booleen Dictionnaire_Vide(Dictionnaire D);
