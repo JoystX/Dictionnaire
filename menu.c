@@ -1,64 +1,83 @@
 #include"fonctions.h"
 
-int main()
+int main(int argc, char *argv[])
 {
     
     printf("Bienvenu sur Dictionnaire V2\n\n\n\n");
 	int continuer = 1;
-	while(continuer == 1){
+	char *string1 = "bonjour";
+	char *string2;
+	Dictionnaire actuel;
+	while(continuer != 0){
 		int choix;
-		printf("Choisissez votre option :\n\n");
-
-		printf("1- Ajouter un mot\n");
-		printf("2- Supprimer un mot\n");
-		printf("3- Afficher le contenu du dictionnaire\n");
-		printf("4- Tester si un mot appartient au dictionnaire\n");
-		printf("5- Vider le dictionnaire\n");
-		printf("6- Sauvegarder le contenu du dictionnaire dans fichier\n");
-		printf("7- Charger un dictionnaire à partir d'un fichier\n");
-		printf("8- Quitter\n");
-
-		switch (choix){
+		char mot[MAX_LENGTH];
+		switch(continuer){
 			case 1:
-			break;
+				printf("Choisissez votre option :\n\n");
 
-			case 2:
-			break;
+				printf("1- Ajouter un mot\n");
+				printf("2- Supprimer un mot\n");
+				printf("3- Afficher le contenu du dictionnaire\n");
+				printf("4- Tester si un mot appartient au dictionnaire\n");
+				printf("5- Vider le dictionnaire\n");
+				printf("6- Sauvegarder le contenu du dictionnaire dans fichier\n");
+				printf("7- Charger un dictionnaire à partir d'un fichier\n");
+				printf("8- Quitter\n");
+				printf("9 - Test \n");
 
-			case 3:
-			break;
+				scanf("%d",&choix);
 
-			case 4:
-			break;
+				switch (choix){
+					case 1:
+						continuer = 2;
 
-			case 5:
-			break;
+					break;
 
-			case 6:
-			break;
+					case 2:
+					break;
 
-			case 7:
-			break;
+					case 3:
+						Afficher_Dictionnaire(actuel);
+					break;
 
-			case 8: printf("Au revoir");
-			break;
+					case 4:
+					break;
 
-			default : printf("\n\n\nVeuillez entrer un choix valide\n");
+					case 5:
+					break;
+
+					case 6:
+					break;
+
+					case 7:
+					break;
+
+					case 8: printf("\nAu revoir\n");
+						continuer=0;
+					break;
+					
+					case 9: // Test fonction fin_du_mot
+						
+						string2 = fin_du_mot(string1, 3);
+						printf("Fin du mot : %s",string2);
+					break;
+					default : printf("\n\n\nVeuillez entrer un choix valide\n");
+						break;
+			}
+			break;
+			
+			case 2:	// ajouter mot
+				printf("\nQuel mot ajouter ?\n");
+				scanf("%s",mot);
+				Ajouter_Mot(actuel,mot);
+				printf("\n\n");
+				continuer=1;
 				break;
-
+			default :
+			break;
 		}
 
 
-		scanf("%d",&choix);
 	}
     return 0;
 }
-
-//Dictionnaire Creer_Dictionnaire {return Dictionnaire;}
-//Ajouter_Mot(Dictionaire dico1, Mot mot1) {return Dictionnaire;}
-//Supprimer_Mot(Dictionnaire dico1,Mot mot){return Dictionnaire;}
-//Appartient_Mot(Dictionnaire dico1, Mot mot1){reutrn boolen a}
-//Afficher_Dictionnaire
-//Vider_Dictionnaire(Dictionnaire dico1)
-//Save_Dictionnaire
-//Charger dictionnaire
