@@ -8,18 +8,37 @@ int main(int argc, char *argv[])
 	char *string1 = "bonjour";
 	char *string2;
 	char motAffichage[MAX_LENGTH] = {'\0'};
-	Dictionnaire actuel=Creer_Dictionnaire();
-	actuel->lettre='c';
+	Dictionnaire actuel=NULL;//=Creer_Dictionnaire();
+	
+	// DICO DE TEST ( celui du cours et du sujet ). Dé-commenter pour tester ( ne pas oublier Creer-Dictionnaire juste au dessus )
+	/*actuel->lettre='c';
 	actuel->PFG=Creer_Dictionnaire();	
 	actuel->PFG->lettre='a';
 	actuel->PFG->PFD=Creer_Dictionnaire();
 	actuel->PFG->PFD->lettre='o';
-	/*actuel->PFD->PFG=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFD=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFD->lettre='l';*/
+	actuel->PFG->PFD->PFG=Creer_Dictionnaire();
+	actuel->PFG->PFD->PFG->lettre='l';
+	actuel->PFG->PFD->PFG->PFG=Creer_Dictionnaire();
+	actuel->PFG->PFD->PFG->PFG->lettre='\0';
+	actuel->PFG->PFD->PFG->PFG->PFD=Creer_Dictionnaire();
+	actuel->PFG->PFD->PFG->PFG->PFD->lettre='l';
+	actuel->PFG->PFD->PFG->PFG->PFD->PFG=Creer_Dictionnaire();
+	actuel->PFG->PFD->PFG->PFG->PFD->PFG->lettre='i';
+	actuel->PFG->PFD->PFG->PFG->PFD->PFG->PFG=Creer_Dictionnaire();
+	actuel->PFG->PFD->PFG->PFG->PFD->PFG->PFG->lettre='n';
+	actuel->PFG->PFD->PFG->PFG->PFD->PFG->PFG->PFD=Creer_Dictionnaire();
+	actuel->PFG->PFD->PFG->PFG->PFD->PFG->PFG->PFD->lettre='s';
+	actuel->PFG->PFD->PFG->PFG->PFD->PFG->PFG->PFG=Creer_Dictionnaire();
+	actuel->PFG->PFD->PFG->PFG->PFD->PFG->PFG->PFG->lettre='e';
+	actuel->PFG->PFD->PFG->PFD=Creer_Dictionnaire();
+	actuel->PFG->PFD->PFG->PFD->lettre='u';
+	actuel->PFG->PFG=Creer_Dictionnaire();
+	actuel->PFG->PFG->lettre='\0';
+	actuel->PFG->PFG->PFD=Creer_Dictionnaire();
+	actuel->PFG->PFG->PFD->lettre='l';
+	actuel->PFG->PFG->PFD->PFG=Creer_Dictionnaire();
+	actuel->PFG->PFG->PFD->PFG->lettre='e';*/
 	
-	/*actuel->PFD->PFG->PFD=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFD->lettre='i';*/
 	while(continuer != 0){
 		int choix;
 		char mot[MAX_LENGTH];

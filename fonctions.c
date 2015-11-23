@@ -9,12 +9,12 @@ char *fin_du_mot(char mot[], int index){ // Cree une string qui contient la fin 
 	return nouveau;
 }
 
-Dictionnaire Creer_Dictionnaire(void){
+Dictionnaire Creer_Dictionnaire(void){ // Fonctionne
 	Dictionnaire D;
 	D = (Dictionnaire)malloc(sizeof(*D));
 	return D;
 }
-Dictionnaire Ajouter_Mot(Dictionnaire D, char M[]){
+Dictionnaire Ajouter_Mot(Dictionnaire D, char M[]){ // En cours 
 	if(M[0]!='\0'){
 		if(D==NULL){
 			printf("création noeud\n");
@@ -42,33 +42,39 @@ Dictionnaire Ajouter_Mot(Dictionnaire D, char M[]){
 Dictionnaire Supprimer_Mot(Dictionnaire D,char M[]){
 	return D;
 }
-void Afficher_Dictionnaire(Dictionnaire D,char motActuel[]){
+void Afficher_Dictionnaire(Dictionnaire D,char motActuel[]){ // Fonctionne 
 	if(D!=NULL){
 		int i = 0;
 		while(motActuel[i]!='\0'){
 			i++;
 			}
+		//printf("Ajout d'une lettre\n");
 		motActuel[i] = D->lettre;
 		if(D->PFG!=NULL){
+			//printf("On descend \n");
 			Afficher_Dictionnaire(D->PFG,motActuel);
 		}
 		else{
 			printf("%s",motActuel);
+			motActuel[i]='\0';
 		}
 		printf("\n");
 		if(D->PFD!=NULL){
+			//printf("On va à droite \n");
 			Afficher_Dictionnaire(D->PFD,motActuel);
 		}
 		else{
-			//printf("PFD NULL");
-			motActuel[i]='\0';
+			//printf("Retrait d'une lettre");
+			motActuel[i-1]='\0';
 		}
 	}
+	else
+	printf("Dictionnaire vide !\n ");
 }
-Booleen Appartient_Mot(Dictionnaire D,char M[]){
+Booleen Appartient_Mot(Dictionnaire D,char M[]){ // Pas commencé
 	return Faux;
 }
-Booleen Dictionnaire_Vide(Dictionnaire D){
+Booleen Dictionnaire_Vide(Dictionnaire D){ // Pas commencé
 	return Faux;
 }
 
