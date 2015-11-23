@@ -7,7 +7,16 @@ int main(int argc, char *argv[])
 	int continuer = 1;
 	char *string1 = "bonjour";
 	char *string2;
-	Dictionnaire actuel;
+	Dictionnaire actuel=Creer_Dictionnaire();
+	actuel->lettre='c';
+	actuel->PFG=Creer_Dictionnaire();	
+	actuel->PFG->lettre='a';
+	actuel->PFD=Creer_Dictionnaire();
+	actuel->PFD->lettre='o';
+	/*actuel->PFD->PFG=Creer_Dictionnaire();
+	actuel->PFD->PFG->lettre='r';
+	actuel->PFD->PFG->PFD=Creer_Dictionnaire();
+	actuel->PFD->PFG->PFD->lettre='i';*/
 	while(continuer != 0){
 		int choix;
 		char mot[MAX_LENGTH];
@@ -37,7 +46,13 @@ int main(int argc, char *argv[])
 					break;
 
 					case 3:
+					if(actuel!=NULL){
+						printf("\nAffichage du Dictionnaire :\n\n");
 						Afficher_Dictionnaire(actuel);
+						
+					}
+					else
+						printf("\nLe Dictionnaire est vide ! \n");
 					break;
 
 					case 4:
@@ -69,7 +84,7 @@ int main(int argc, char *argv[])
 			case 2:	// ajouter mot
 				printf("\nQuel mot ajouter ?\n");
 				scanf("%s",mot);
-				Ajouter_Mot(actuel,mot);
+				actuel=Ajouter_Mot(actuel,mot);
 				printf("\n\n");
 				continuer=1;
 				break;

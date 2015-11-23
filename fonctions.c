@@ -15,14 +15,27 @@ Dictionnaire Creer_Dictionnaire(void){
 	return D;
 }
 Dictionnaire Ajouter_Mot(Dictionnaire D, char M[]){
-	if(D==NULL){
-		D=Creer_Dictionnaire();
-	}
-	int i;
-	for(i=0;i<MAX_LENGTH;i++){ // On parcourt chaque lettre du mot
-		Ajouter_Mot(D->PFG,fin_du_mot(M,i);
-		
-			
+	if(M[0]!='\0'){
+		if(D==NULL){
+			printf("création noeud\n");
+			D=Creer_Dictionnaire();
+		}
+		if(D->lettre=='\0'){
+			D->lettre=M[0];
+			printf("ajout de la lettre %c\n",D->lettre);
+			printf("Ajout du mot %s dans le PFG\n",fin_du_mot(M,1));
+			Ajouter_Mot(D->PFG,fin_du_mot(M,1));
+		}
+		else if(M[0]>D->lettre){
+			Ajouter_Mot(D->PFD, M);
+		}
+		else if(M[0]<D->lettre){
+			D->PFD=D;
+			Ajouter_Mot(D->PFG,M);
+		}
+		else if(M[0]==D->lettre){
+			Ajouter_Mot(D->PFG,fin_du_mot(M,1));	
+		}
 	}
 	return D;
 }
@@ -31,10 +44,10 @@ Dictionnaire Supprimer_Mot(Dictionnaire D,char M[]){
 }
 void Afficher_Dictionnaire(Dictionnaire D){
 	if(D!=NULL){
-		printf(D->lettre);
-		Afficher_Dictionnaire(PFG);
+		printf("%c",D->lettre);
+		Afficher_Dictionnaire(D->PFG);
 		printf("\n");
-		Afficher_Dictionnaire(PFD);
+		Afficher_Dictionnaire(D->PFD);
 	}
 }
 Booleen Appartient_Mot(Dictionnaire D,char M[]){
