@@ -42,12 +42,27 @@ Dictionnaire Ajouter_Mot(Dictionnaire D, char M[]){
 Dictionnaire Supprimer_Mot(Dictionnaire D,char M[]){
 	return D;
 }
-void Afficher_Dictionnaire(Dictionnaire D){
+void Afficher_Dictionnaire(Dictionnaire D,char motActuel[]){
 	if(D!=NULL){
-		printf("%c",D->lettre);
-		Afficher_Dictionnaire(D->PFG);
+		int i = 0;
+		while(motActuel[i]!='\0'){
+			i++;
+			}
+		motActuel[i] = D->lettre;
+		if(D->PFG!=NULL){
+			Afficher_Dictionnaire(D->PFG,motActuel);
+		}
+		else{
+			printf("%s",motActuel);
+		}
 		printf("\n");
-		Afficher_Dictionnaire(D->PFD);
+		if(D->PFD!=NULL){
+			Afficher_Dictionnaire(D->PFD,motActuel);
+		}
+		else{
+			//printf("PFD NULL");
+			motActuel[i]='\0';
+		}
 	}
 }
 Booleen Appartient_Mot(Dictionnaire D,char M[]){

@@ -18,6 +18,6 @@ char * fin_du_mot(char mot[], int index);
 Dictionnaire Creer_Dictionnaire();
 Dictionnaire Ajouter_Mot(Dictionnaire D, char M[]);
 Dictionnaire Supprimer_Mot(Dictionnaire D,char M[]);
-void Afficher_Dictionnaire(Dictionnaire D);
+void Afficher_Dictionnaire(Dictionnaire D, char motActuel[]);
 Booleen Appartient_Mot(Dictionnaire D,char M[]);
 Booleen Dictionnaire_Vide(Dictionnaire D);

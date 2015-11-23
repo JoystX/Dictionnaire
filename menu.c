@@ -7,15 +7,18 @@ int main(int argc, char *argv[])
 	int continuer = 1;
 	char *string1 = "bonjour";
 	char *string2;
+	char motAffichage[MAX_LENGTH] = {'\0'};
 	Dictionnaire actuel=Creer_Dictionnaire();
 	actuel->lettre='c';
 	actuel->PFG=Creer_Dictionnaire();	
 	actuel->PFG->lettre='a';
-	actuel->PFD=Creer_Dictionnaire();
-	actuel->PFD->lettre='o';
+	actuel->PFG->PFD=Creer_Dictionnaire();
+	actuel->PFG->PFD->lettre='o';
 	/*actuel->PFD->PFG=Creer_Dictionnaire();
-	actuel->PFD->PFG->lettre='r';
 	actuel->PFD->PFG->PFD=Creer_Dictionnaire();
+	actuel->PFD->PFG->PFD->lettre='l';*/
+	
+	/*actuel->PFD->PFG->PFD=Creer_Dictionnaire();
 	actuel->PFD->PFG->PFD->lettre='i';*/
 	while(continuer != 0){
 		int choix;
@@ -48,7 +51,7 @@ int main(int argc, char *argv[])
 					case 3:
 					if(actuel!=NULL){
 						printf("\nAffichage du Dictionnaire :\n\n");
-						Afficher_Dictionnaire(actuel);
+						Afficher_Dictionnaire(actuel,motAffichage);
 						
 					}
 					else
@@ -73,8 +76,7 @@ int main(int argc, char *argv[])
 					
 					case 9: // Test fonction fin_du_mot
 						
-						string2 = fin_du_mot(string1, 3);
-						printf("Fin du mot : %s",string2);
+						printf("%s",motAffichage);
 					break;
 					default : printf("\n\n\nVeuillez entrer un choix valide\n");
 						break;
