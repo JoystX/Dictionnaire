@@ -8,7 +8,8 @@ int main(int argc, char *argv[])
 	char *string1 = "bonjour";
 	char *string2;
 	char motAffichage[MAX_LENGTH] = {'\0'};
-	Dictionnaire actuel=NULL;//=Creer_Dictionnaire();
+	char motTest[MAX_LENGTH] = "coucou";
+	Dictionnaire actuel=NULL;//Creer_Dictionnaire();
 	
 	// DICO DE TEST ( celui du cours et du sujet ). Dé-commenter pour tester ( ne pas oublier Creer-Dictionnaire juste au dessus )
 	/*actuel->lettre='c';
@@ -95,7 +96,8 @@ int main(int argc, char *argv[])
 					
 					case 9: // Test fonction fin_du_mot
 						
-						printf("%s",motAffichage);
+						printf("Mot avant : %s",motTest);
+						printf("Mot après : %s",motTest);
 					break;
 					default : printf("\n\n\nVeuillez entrer un choix valide\n");
 						break;
