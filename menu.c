@@ -10,18 +10,12 @@ int main(int argc, char *argv[])
 	char motAffichage[MAX_LENGTH] = {'\0'};
 	char motTest[MAX_LENGTH] = "coucou";
 	Dictionnaire actuel=Creer_Dictionnaire();
-  //Dictionnaire test = Creer_Dictionnaire();
-  // DICO DE TEST 2 ( a - b)
-  /*actuel->lettre='b';
-  //test = actuel;
-  actuel->PFG=Creer_Dictionnaire();
-  actuel->PFG->lettre='a';
-	actuel->PFD=actuel;*/
+    Dictionnaire actuelTransition = NULL;//Creer_Dictionnaire();
 
 
 
 	// DICO DE TEST ( celui du cours et du sujet ). D�-commenter pour tester ( ne pas oublier Creer-Dictionnaire juste au dessus )
-  printf("( Dico du cours )\n");
+ /* printf("( Dico du cours )\n");
 	actuel->lettre='c';
 	actuel->PFG=Creer_Dictionnaire();
 	actuel->PFG->lettre='a';
@@ -105,7 +99,7 @@ int main(int argc, char *argv[])
   actuel->PFD->PFG->PFD->PFD->PFG->PFD->PFD->PFG=Creer_Dictionnaire();
 	actuel->PFD->PFG->PFD->PFD->PFG->PFD->PFD->PFG->lettre='t';
   actuel->PFD->PFG->PFD->PFD->PFG->PFD->PFD->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFD->PFD->PFG->PFD->PFD->PFG->PFG->lettre='*';
+	actuel->PFD->PFG->PFD->PFD->PFG->PFD->PFD->PFG->PFG->lettre='*';  */
 
 
 	while(continuer != 0){

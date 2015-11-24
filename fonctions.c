@@ -32,27 +32,31 @@ Dictionnaire Ajouter_Mot(Dictionnaire D, char M[]){ // En cours
 		}
 		else if(M[0]<D->lettre){
 			printf("Passage du mot à gauche ( on décale tout vers la droite )\n" );
-			D->PFD=Creer_Dictionnaire();
-			D->PFD=D;
-			D->lettre=M[0];
+			Dictionnaire transition = Creer_Dictionnaire();
+			transition->PFD=D;
+			transition->lettre=M[0];
+			D=transition;
 			printf("Ajout de la lettre %x\n",D->lettre);
 			printf("Ajout du mot %s dans le PFG\n",fin_du_mot(M,1));
 			D->PFG=Ajouter_Mot(D->PFG,fin_du_mot(M,1));
 		}
 		else if(M[0]==D->lettre){
-			if(D->PFG->lettre='*'){
-				D->PFG=Ajouter_Mot(D->PFG,fin_du_mot(M,1));
-			}
-			else{
-				D->PFG->PFD=Creer_Dictionnaire();
-				D->PFG->PFD=Ajouter_Mot(D->PFG->PFD,fin_du_mot(M,1));
-			}
+			printf("Même lettre, on passe à la suivante \n");
+			D->PFG=Ajouter_Mot(D->PFG,fin_du_mot(M,1));
 		}
 	}
 	else {
-		D=Creer_Dictionnaire();
-		D->lettre='*';
-		printf("Ajout de la lettre %x\n",D->lettre);
+		if(D==NULL){
+			D=Creer_Dictionnaire();
+			D->lettre='*';
+			printf("Ajout de la lettre %x\n",D->lettre);
+		}
+		else{
+			Dictionnaire transition = Creer_Dictionnaire();
+			transition->PFD=D;
+			transition->lettre='*';
+			D=transition;
+		}
 	}
 	return D;
 }
