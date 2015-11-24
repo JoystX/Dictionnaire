@@ -14,7 +14,7 @@ Dictionnaire Creer_Dictionnaire(void){ // Fonctionne
 	D = (Dictionnaire)malloc(sizeof(*D));
 	return D;
 }
-Dictionnaire Ajouter_Mot(Dictionnaire D, char M[]){ // En cours 
+Dictionnaire Ajouter_Mot(Dictionnaire D, char M[]){ // En cours
 	if(M[0]!='\0'){
 		if(D==NULL){
 			printf("Création noeud\n");
@@ -22,48 +22,58 @@ Dictionnaire Ajouter_Mot(Dictionnaire D, char M[]){ // En cours
 		}
 		if(D->lettre=='\0'){
 			D->lettre=M[0];
-			printf("Ajout de la lettre %c\n",D->lettre);
+			printf("Ajout de la lettre %x\n",D->lettre);
 			printf("Ajout du mot %s dans le PFG\n",fin_du_mot(M,1));
 			D->PFG=Ajouter_Mot(D->PFG,fin_du_mot(M,1));
 		}
 		else if(M[0]>D->lettre){
+			printf("Passage du mot au frère droit\n" );
 			D->PFD=Ajouter_Mot(D->PFD, M);
 		}
 		else if(M[0]<D->lettre){
+			printf("Passage du mot à gauche ( on décale tout vers la droite )\n" );
 			D->PFD=Creer_Dictionnaire();
 			D->PFD=D;
-			D->PFG=Ajouter_Mot(D->PFG,M);
+			D->lettre=M[0];
+			printf("Ajout de la lettre %x\n",D->lettre);
+			printf("Ajout du mot %s dans le PFG\n",fin_du_mot(M,1));
+			D->PFG=Ajouter_Mot(D->PFG,fin_du_mot(M,1));
 		}
 		else if(M[0]==D->lettre){
-			if(D->PFG==NULL)
-			D->PFG=Ajouter_Mot(D->PFG,fin_du_mot(M,1));	
-			else
-			D->PFG=Creer_Dictionnaire();
-			D->PFG->lettre='\0';
+			if(D->PFG->lettre='*'){
+				D->PFG=Ajouter_Mot(D->PFG,fin_du_mot(M,1));
+			}
+			else{
+				D->PFG->PFD=Creer_Dictionnaire();
+				D->PFG->PFD=Ajouter_Mot(D->PFG->PFD,fin_du_mot(M,1));
+			}
 		}
 	}
 	else {
-		printf("Le mot entré est vide !\n");
 		D=Creer_Dictionnaire();
-		D->lettre='\0';
+		D->lettre='*';
+		printf("Ajout de la lettre %x\n",D->lettre);
 	}
 	return D;
 }
 Dictionnaire Supprimer_Mot(Dictionnaire D,char M[]){
 	return D;
 }
-void Afficher_Dictionnaire(Dictionnaire D,char motActuel[]){ // Fonctionne 
+void Afficher_Dictionnaire(Dictionnaire D,char motActuel[]){ // Fonctionne
 	if(D!=NULL){
 		int i = 0;
 		while(motActuel[i]!='\0'){ // On se place à la fin du mot actuel
 			i++;
-			}
-		// Ajout de la lettre du noeud actuel 
-		motActuel[i] = D->lettre;
+		}
+	if(D->lettre!='*'){ // CONDITION IMPORTANTE !!! : Permet de ne pas lire les '*' à la fin des mots // Desactiver pour debug
+			// Ajout de la lettre du noeud actuel
+			motActuel[i] = D->lettre;
+	}
+
 		if(D->PFG!=NULL){
 			Afficher_Dictionnaire(D->PFG,motActuel);
 		}
-		else{ // S'il n'y a pas de fils gauche, c'est qu'on est arrivé au bout d'un mot 
+		else{ // S'il n'y a pas de fils gauche, c'est qu'on est arrivé au bout d'un mot
 			printf("%s\n",motActuel); // >>> Affichage du mot actuel, puis on remonte jusqu'à un noeud qui a un frère droit en enlevant un caractère à chaque fois
 			motActuel[i]='\0';
 		}
@@ -84,4 +94,3 @@ Booleen Appartient_Mot(Dictionnaire D,char M[]){ // Pas commencé
 Booleen Dictionnaire_Vide(Dictionnaire D){ // Pas commencé
 	return Faux;
 }
-
