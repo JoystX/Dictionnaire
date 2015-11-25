@@ -16,6 +16,7 @@ Dictionnaire Creer_Dictionnaire(void){ // Fonctionne
 }
 Dictionnaire Ajouter_Mot(Dictionnaire D, char M[]){ // En cours
 	if(M[0]!='\0'){
+		M=minuscule(M);
 		if(D==NULL){
 			printf("Création noeud\n");
 			D=Creer_Dictionnaire();
@@ -98,3 +99,27 @@ Booleen Appartient_Mot(Dictionnaire D,char M[]){ // Pas commencé
 Booleen Dictionnaire_Vide(Dictionnaire D){ // Pas commencé
 	return Faux;
 }
+
+char * minuscule (char mot[]){
+	
+	int i=0;
+	
+	while(mot[i]!='\0'){
+	if(mot[i]>122 || mot[i]<97 ){
+		if(mot[i]<91 && mot[i]>64){
+		mot[i]=mot[i]+32;
+		}
+		else{
+		printf("Votre mot comporte des caracteres autre que des lettres.\n");
+		exit(1);
+		}
+	}
+	i++;
+}
+	
+	
+	
+	
+return mot;
+}
+

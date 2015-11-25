@@ -21,3 +21,4 @@ Dictionnaire Supprimer_Mot(Dictionnaire D,char M[]);
 void Afficher_Dictionnaire(Dictionnaire D, char motActuel[]);
 Booleen Appartient_Mot(Dictionnaire D,char M[]);
 Booleen Dictionnaire_Vide(Dictionnaire D);
+char * minuscule (char mot[]);

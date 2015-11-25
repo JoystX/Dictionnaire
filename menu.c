@@ -1,16 +1,16 @@
-#include"fonctions.h"
+#include "fonctions.h"
 
 int main(int argc, char *argv[])
 {
 
     printf("Bienvenu sur Dictionnaire V2\n\n\n\n");
 	int continuer = 1;
-	char *string1 = "bonjour";
-	char *string2;
+	//char *string1 = "bonjour";
+	//char *string2;
 	char motAffichage[MAX_LENGTH] = {'\0'};
 	char motTest[MAX_LENGTH] = "coucou";
 	Dictionnaire actuel=Creer_Dictionnaire();
-    Dictionnaire actuelTransition = NULL;//Creer_Dictionnaire();
+   // Dictionnaire actuelTransition = NULL;//Creer_Dictionnaire();
 
 
 
