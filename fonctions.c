@@ -28,7 +28,7 @@ Dictionnaire Ajouter_Mot(Dictionnaire D, char M[]){ // En cours
 			D->PFG=Ajouter_Mot(D->PFG,fin_du_mot(M,1));
 		}
 		else if(M[0]>D->lettre){
-			printf("Passage du mot au frère droit\n" );
+			printf("Pa1ssage du mot au frère droit\n" );
 			D->PFD=Ajouter_Mot(D->PFD, M);
 		}
 		else if(M[0]<D->lettre){
@@ -64,7 +64,7 @@ Dictionnaire Ajouter_Mot(Dictionnaire D, char M[]){ // En cours
 Dictionnaire Supprimer_Mot(Dictionnaire D,char M[]){
 	return D;
 }
-void Afficher_Dictionnaire(Dictionnaire D,char motActuel[]){ // Fonctionne
+char* Afficher_Dictionnaire(Dictionnaire D,char motActuel[], Booleen save){ // Fonctionne
 	if(D!=NULL){
 		int i = 0;
 		while(motActuel[i]!='\0'){ // On se place à la fin du mot actuel
@@ -76,14 +76,21 @@ void Afficher_Dictionnaire(Dictionnaire D,char motActuel[]){ // Fonctionne
 	}
 
 		if(D->PFG!=NULL){
-			Afficher_Dictionnaire(D->PFG,motActuel);
+			Afficher_Dictionnaire(D->PFG,motActuel,save);
 		}
 		else{ // S'il n'y a pas de fils gauche, c'est qu'on est arrivé au bout d'un mot
+			
+			if(save == Vrai){
+			enregistrer(motActuel);
+			}
+			else{
 			printf("%s\n",motActuel); // >>> Affichage du mot actuel, puis on remonte jusqu'à un noeud qui a un frère droit en enlevant un caractère à chaque fois
+			}
+			
 			motActuel[i]='\0';
 		}
 		if(D->PFD!=NULL){
-			Afficher_Dictionnaire(D->PFD,motActuel);
+			Afficher_Dictionnaire(D->PFD,motActuel,save);
 		}
 		else{
 			// S'il n'y a pas de fils droit, on continue à remonter et enlever un caractère à chaque fois
@@ -92,15 +99,20 @@ void Afficher_Dictionnaire(Dictionnaire D,char motActuel[]){ // Fonctionne
 	}
 	else
 	printf("Dictionnaire vide !\n ");
+	
+	return 0;
 }
 Booleen Appartient_Mot(Dictionnaire D,char M[]){ // Pas commencé
+	
+	
+	
 	return Faux;
 }
 Booleen Dictionnaire_Vide(Dictionnaire D){ // Pas commencé
 	return Faux;
 }
 
-char * minuscule (char mot[]){
+char * minuscule (char mot[]){ // Fonctionne
 	
 	int i=0;
 	
@@ -123,3 +135,19 @@ char * minuscule (char mot[]){
 return mot;
 }
 
+void enregistrer (char  M[]){
+
+	FILE *flo1 = NULL;
+flo1 = fopen("dico.algo", "a+");	
+
+if ( flo1 == NULL)
+{
+	printf(" Le dictionnaire ne peut être enregistré.\n");
+    exit(2);
+}
+else{
+	printf("Mot enregistré : %s \n",M);
+	fprintf(flo1,"%s\n",M);
+	}
+	fclose(flo1);
+}

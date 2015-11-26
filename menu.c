@@ -133,7 +133,7 @@ int main(int argc, char *argv[])
 					case 3:
 					if(actuel!=NULL){
 						printf("\nAffichage du Dictionnaire :\n\n");
-						Afficher_Dictionnaire(actuel,motAffichage);
+						Afficher_Dictionnaire(actuel,motAffichage,Faux);
 
 					}
 					else
@@ -147,6 +147,9 @@ int main(int argc, char *argv[])
 					break;
 
 					case 6:
+					printf("\n Sauvegarde du dictionnaire en cours... \n");
+					Afficher_Dictionnaire(actuel,motAffichage,Vrai);
+
 					break;
 
 					case 7:
@@ -164,7 +167,7 @@ int main(int argc, char *argv[])
 					default : printf("\n\n\nVeuillez entrer un choix valide\n");
 						break;
 			}
-			break;
+			break;	
 
 			case 2:	// ajouter mot
 				printf("\nQuel mot ajouter ?\n");
