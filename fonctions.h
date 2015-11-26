@@ -18,7 +18,7 @@ char * fin_du_mot(char mot[], int index);
 Dictionnaire Creer_Dictionnaire();
 Dictionnaire Ajouter_Mot(Dictionnaire D, char M[]);
 Dictionnaire Supprimer_Mot(Dictionnaire D,char M[]);
-char* Afficher_Dictionnaire(Dictionnaire D,char motActuel[], Booleen enregistrer);
+char* Traiter_Dictionnaire(Dictionnaire D,char motActuel[], Booleen enregistrer);
 Booleen Appartient_Mot(Dictionnaire D,char M[]);
 Booleen Dictionnaire_Vide(Dictionnaire D);
 char * minuscule (char mot[]);
