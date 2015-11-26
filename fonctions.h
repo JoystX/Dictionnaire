@@ -23,3 +23,4 @@ Booleen Appartient_Mot(Dictionnaire D,char M[]);
 Booleen Dictionnaire_Vide(Dictionnaire D);
 char * minuscule (char mot[]);
 void enregistrer (char  M[]);
+void charger (Dictionnaire D);

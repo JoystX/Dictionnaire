@@ -153,6 +153,8 @@ int main(int argc, char *argv[])
 					break;
 
 					case 7:
+					printf("\n Chargement du dictionnaire en cours... \n");
+					charger(actuel);
 					break;
 
 					case 8: printf("\nAu revoir\n");

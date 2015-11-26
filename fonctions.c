@@ -112,17 +112,17 @@ Booleen Dictionnaire_Vide(Dictionnaire D){ // Pas commencé
 	return Faux;
 }
 
-char * minuscule (char mot[]){ // Fonctionne
+char * minuscule (char mot[]){ // Focntion vérifiant les mots entrés par l'utilisateur.
 	
 	int i=0;
 	
-	while(mot[i]!='\0'){
-	if(mot[i]>122 || mot[i]<97 ){
-		if(mot[i]<91 && mot[i]>64){
-		mot[i]=mot[i]+32;
+	while(mot[i]!='\0'){			// On analyse entierement le mot
+	if(mot[i]>122 || mot[i]<97 ){		// Si le mot est un caractère différents de a à z
+		if(mot[i]<91 && mot[i]>64){		// Soit le mot comporte une majuscule
+		mot[i]=mot[i]+32;				// On le met en minuscule
 		}
 		else{
-		printf("Votre mot comporte des caracteres autre que des lettres.\n");
+		printf("Votre mot comporte des caracteres autre que des lettres.\n");	// Soit le mot comporte un caractere complétement différents de a-z, A-Z
 		exit(1);
 		}
 	}
@@ -135,19 +135,44 @@ char * minuscule (char mot[]){ // Fonctionne
 return mot;
 }
 
-void enregistrer (char  M[]){
+void enregistrer (char  M[]){ // Fonction d'enregistrement du dictionnaire
 
-	FILE *flo1 = NULL;
-flo1 = fopen("dico.algo", "a+");	
+	FILE *flo1 = NULL;	
+flo1 = fopen("dico.algo", "a+");	// On ouvre le fichier en fin de curseur
 
 if ( flo1 == NULL)
 {
-	printf(" Le dictionnaire ne peut être enregistré.\n");
+	printf(" Le dictionnaire ne peut être enregistré.\n");	// Si le fichier n'est pas accessible
     exit(2);
 }
 else{
-	printf("Mot enregistré : %s \n",M);
-	fprintf(flo1,"%s\n",M);
+	printf("Mot enregistré : %s \n",M);	// Sinon, on enregistre le mot
+	fprintf(flo1,"%s\n",M);	// Ajout du mot
 	}
-	fclose(flo1);
+	fclose(flo1);	// On referme le flux
 }
+
+void charger (Dictionnaire D){	// Fonction chargeant un dictionnaire
+
+FILE *flo1 = NULL;
+flo1=fopen("dico.algo","r");	// Ouverture du dictionnaire en lecture seule
+char TempMot[MAX_LENGTH];		//Mot tempon
+
+if (flo1 == NULL){
+	printf("Le dictionnaire ne peut être chargé.\n");	// Si on ne peut pas ouvrir le dictionnaire
+}
+else{
+	
+while (!feof(flo1))			// Tant que l'on est pas arrivé à la fin de fichier
+{
+               fscanf(flo1,"%s",TempMot);		// On lis la chaîne de caractère et on déplace le curseur à la fin
+               Ajouter_Mot(D, TempMot);			// On ajoute alors le mot au dictionnaire
+               printf(" Le mot %s à été chargé. \n", TempMot);
+}
+fclose(flo1);	// On ferme le flux
+}
+
+}
+
+
+
