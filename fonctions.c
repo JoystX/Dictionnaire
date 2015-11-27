@@ -102,7 +102,8 @@ char* Traiter_Dictionnaire(Dictionnaire D,char motActuel[], Booleen save){ // Fo
 
 	return 0;
 }
-Booleen Appartient_Mot(Dictionnaire D,char M[], char motActuel[]){ // En cours
+Booleen Appartient_Mot(Dictionnaire D,char M[], char motActuel[]){ // En Fonctionne
+	Booleen valeur=Faux;
 	if(D!=NULL){
 		int i = 0;
 		while(motActuel[i]!='\0'){ // On se place à la fin du mot actuel
@@ -114,19 +115,23 @@ Booleen Appartient_Mot(Dictionnaire D,char M[], char motActuel[]){ // En cours
 	}
 
 		if(D->PFG!=NULL){
-			return Appartient_Mot(D->PFG,M,motActuel);
+			if(valeur == Faux )
+			valeur = Appartient_Mot(D->PFG,M,motActuel);
 		}
 		else{ // S'il n'y a pas de fils gauche, c'est qu'on est arrivé au bout d'un mot
-		printf("Mot actuel : %s\n",motActuel);
-		printf("Mot à test : %s\n",M );
 			if(strcmp(M,motActuel)==0){
-				printf("mots identiques\n");
-				 return Vrai;
+				int i = 0;
+				for(i=0;i<MAX_LENGTH;i++){
+					 motActuel[i]='\0';
+				 }
+				 valeur = Vrai;
+
 			 }
 			motActuel[i]='\0';
 		}
 		if(D->PFD!=NULL){
-			return Appartient_Mot(D->PFD,M,motActuel);
+			if( valeur == Faux )
+			 valeur = Appartient_Mot(D->PFD,M,motActuel);
 		}
 		else{
 			// S'il n'y a pas de fils droit, on continue à remonter et enlever un caractère à chaque fois
@@ -135,9 +140,18 @@ Booleen Appartient_Mot(Dictionnaire D,char M[], char motActuel[]){ // En cours
 	}
 	else
 	printf("Dictionnaire vide !\n ");
-	return Faux;
+	return valeur;
 }
-Booleen Dictionnaire_Vide(Dictionnaire D){ // Pas commencé
+
+Booleen Dictionnaire_Vide(Dictionnaire D){ // En cours
+	if(D==NULL){
+		return Vrai;
+	}
+	else{
+		if(D->lettre=='\0'){
+			return Vrai;
+		}
+	}
 	return Faux;
 }
 
