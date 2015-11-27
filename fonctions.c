@@ -66,39 +66,42 @@ Dictionnaire Supprimer_Mot(Dictionnaire D,char M[]){
 }
 char* Traiter_Dictionnaire(Dictionnaire D,char motActuel[], Booleen save){ // Fonctionne
 	if(D!=NULL){
-		int i = 0;
-		while(motActuel[i]!='\0'){ // On se place à la fin du mot actuel
-			i++;
-		}
-	if(D->lettre!='*'){ // CONDITION IMPORTANTE !!! : Permet de ne pas lire les '*' à la fin des mots // Desactiver pour debug
-			// Ajout de la lettre du noeud actuel
-			motActuel[i] = D->lettre;
-	}
+		if(!Dictionnaire_Vide(D)){
+			int i = 0;
+			while(motActuel[i]!='\0'){ // On se place à la fin du mot actuel
+				i++;
+			}
+			if(D->lettre!='*'){ // CONDITION IMPORTANTE !!! : Permet de ne pas lire les '*' à la fin des mots // Desactiver pour debug
+				// Ajout de la lettre du noeud actuel
+				motActuel[i] = D->lettre;
+			}
 
-		if(D->PFG!=NULL){
-			Traiter_Dictionnaire(D->PFG,motActuel,save);
-		}
-		else{ // S'il n'y a pas de fils gauche, c'est qu'on est arrivé au bout d'un mot
+			if(D->PFG!=NULL){
+				Traiter_Dictionnaire(D->PFG,motActuel,save);
+			}
+			else{ // S'il n'y a pas de fils gauche, c'est qu'on est arrivé au bout d'un mot
 
-			if(save == Vrai){
-			enregistrer(motActuel);
+				if(save == Vrai){
+				enregistrer(motActuel);
+				}
+				else{
+				printf("%s\n",motActuel); // >>> Affichage du mot actuel, puis on remonte jusqu'à un noeud qui a un frère droit en enlevant un caractère à chaque fois
+				}
+
+				motActuel[i]='\0';
+			}
+			if(D->PFD!=NULL){
+				Traiter_Dictionnaire(D->PFD,motActuel,save);
 			}
 			else{
-			printf("%s\n",motActuel); // >>> Affichage du mot actuel, puis on remonte jusqu'à un noeud qui a un frère droit en enlevant un caractère à chaque fois
+				// S'il n'y a pas de fils droit, on continue à remonter et enlever un caractère à chaque fois
+				motActuel[i-1]='\0';
 			}
-
-			motActuel[i]='\0';
 		}
-		if(D->PFD!=NULL){
-			Traiter_Dictionnaire(D->PFD,motActuel,save);
-		}
-		else{
-			// S'il n'y a pas de fils droit, on continue à remonter et enlever un caractère à chaque fois
-			motActuel[i-1]='\0';
-		}
+		else printf("Le dictionnaire est vide !\n");
 	}
 	else
-	printf("Dictionnaire vide !\n ");
+	printf("Le dictionnaire n'existe pas !\n ");
 
 	return 0;
 }
@@ -151,6 +154,7 @@ Booleen Dictionnaire_Vide(Dictionnaire D){ // En cours
 		if(D->lettre=='\0'){
 			return Vrai;
 		}
+		else return Faux;
 	}
 	return Faux;
 }

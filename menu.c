@@ -8,7 +8,6 @@ int main(int argc, char *argv[])
 	//char *string1 = "bonjour";
 	//char *string2;
 	char motAffichage[MAX_LENGTH] = {'\0'};
-	char motTest[MAX_LENGTH] = "coucou";
   char motATester[MAX_LENGTH];
   char motAffichageTest[MAX_LENGTH] = { '\0' };
 	Dictionnaire actuel=Creer_Dictionnaire();
@@ -78,10 +77,10 @@ int main(int argc, char *argv[])
 						continuer=0;
 					break;
 
-					case 9: // Test fonction fin_du_mot
+					case 9: // Test si dico vide
 
-						printf("Mot avant : %s",motTest);
-						printf("Mot apr�s : %s",motTest);
+						if(Dictionnaire_Vide(actuel)) printf("Dictionnaire vide !\n");
+            else printf("Dictionnaire non vide !\n");
 					break;
 					default : printf("\n\n\nVeuillez entrer un choix valide\n");
 						break;
