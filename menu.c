@@ -9,98 +9,9 @@ int main(int argc, char *argv[])
 	//char *string2;
 	char motAffichage[MAX_LENGTH] = {'\0'};
 	char motTest[MAX_LENGTH] = "coucou";
+  char motATester[MAX_LENGTH];
+  char motAffichageTest[MAX_LENGTH] = { '\0' };
 	Dictionnaire actuel=Creer_Dictionnaire();
-   // Dictionnaire actuelTransition = NULL;//Creer_Dictionnaire();
-
-
-
-	// DICO DE TEST ( celui du cours et du sujet ). D�-commenter pour tester ( ne pas oublier Creer-Dictionnaire juste au dessus )
- /* printf("( Dico du cours )\n");
-	actuel->lettre='c';
-	actuel->PFG=Creer_Dictionnaire();
-	actuel->PFG->lettre='a';
-  actuel->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFG->PFG->lettre='*'; // Fin de ca*
-  actuel->PFG->PFG->PFD=Creer_Dictionnaire();
-	actuel->PFG->PFG->PFD->lettre='l';
-	actuel->PFG->PFG->PFD->PFG=Creer_Dictionnaire();
-	actuel->PFG->PFG->PFD->PFG->lettre='e';
-  actuel->PFG->PFG->PFD->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFG->PFG->PFD->PFG->PFG->lettre='*'; // Fin de cale*
-	actuel->PFG->PFD=Creer_Dictionnaire();
-	actuel->PFG->PFD->lettre='o';
-	actuel->PFG->PFD->PFG=Creer_Dictionnaire();
-	actuel->PFG->PFD->PFG->lettre='l';
-	actuel->PFG->PFD->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFG->PFD->PFG->PFG->lettre='*'; // Fin de col*
-	actuel->PFG->PFD->PFG->PFG->PFD=Creer_Dictionnaire();
-	actuel->PFG->PFD->PFG->PFG->PFD->lettre='l';
-	actuel->PFG->PFD->PFG->PFG->PFD->PFG=Creer_Dictionnaire();
-	actuel->PFG->PFD->PFG->PFG->PFD->PFG->lettre='i';
-	actuel->PFG->PFD->PFG->PFG->PFD->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFG->PFD->PFG->PFG->PFD->PFG->PFG->lettre='n';
-	actuel->PFG->PFD->PFG->PFG->PFD->PFG->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFG->PFD->PFG->PFG->PFD->PFG->PFG->PFG->lettre='e';
-  actuel->PFG->PFD->PFG->PFG->PFD->PFG->PFG->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFG->PFD->PFG->PFG->PFD->PFG->PFG->PFG->PFG->lettre='*'; // Fin de colline*
-  actuel->PFG->PFD->PFG->PFG->PFD->PFG->PFG->PFD=Creer_Dictionnaire();
-	actuel->PFG->PFD->PFG->PFG->PFD->PFG->PFG->PFD->lettre='s';
-  actuel->PFG->PFD->PFG->PFG->PFD->PFG->PFG->PFD->PFG=Creer_Dictionnaire();
-	actuel->PFG->PFD->PFG->PFG->PFD->PFG->PFG->PFD->PFG->lettre='*'; // Fin de collis*
-	actuel->PFG->PFD->PFG->PFD=Creer_Dictionnaire();
-	actuel->PFG->PFD->PFG->PFD->lettre='u';
-  actuel->PFG->PFD->PFG->PFD->PFG=Creer_Dictionnaire();
-	actuel->PFG->PFD->PFG->PFD->PFG->lettre='r';
-  actuel->PFG->PFD->PFG->PFD->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFG->PFD->PFG->PFD->PFG->PFG->lettre='s';
-  actuel->PFG->PFD->PFG->PFD->PFG->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFG->PFD->PFG->PFD->PFG->PFG->PFG->lettre='*'; // Fin de cours*
-  actuel->PFG->PFD->PFG->PFD->PFG->PFD=Creer_Dictionnaire();
-	actuel->PFG->PFD->PFG->PFD->PFG->PFD->lettre='t';
-  actuel->PFG->PFD->PFG->PFD->PFG->PFD->PFG=Creer_Dictionnaire();
-	actuel->PFG->PFD->PFG->PFD->PFG->PFD->PFG->lettre='*'; // Fin de cout*
-  //Partie de droite ( T )
-  actuel->PFD=Creer_Dictionnaire();
-	actuel->PFD->lettre='t';
-  actuel->PFD->PFG=Creer_Dictionnaire();
-	actuel->PFD->PFG->lettre='a';
-  actuel->PFD->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFG->lettre='r';
-  actuel->PFD->PFG->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFG->PFG->lettre='t';
-  actuel->PFD->PFG->PFG->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFG->PFG->PFG->lettre='e';
-  actuel->PFD->PFG->PFG->PFG->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFG->PFG->PFG->PFG->lettre='*'; // Fin de tarte*
-  actuel->PFD->PFG->PFD=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFD->lettre='i';
-  actuel->PFD->PFG->PFD->PFG=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFD->PFG->lettre='e';
-  actuel->PFD->PFG->PFD->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFD->PFG->PFG->lettre='r';
-  actuel->PFD->PFG->PFD->PFG->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFD->PFG->PFG->PFG->lettre='c';
-  actuel->PFD->PFG->PFD->PFG->PFG->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFD->PFG->PFG->PFG->PFG->lettre='e';
-  actuel->PFD->PFG->PFD->PFG->PFG->PFG->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFD->PFG->PFG->PFG->PFG->PFG->lettre='*'; // Fin de tierce*
-  actuel->PFD->PFG->PFD->PFD=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFD->PFD->lettre='o';
-  actuel->PFD->PFG->PFD->PFD->PFG=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFD->PFD->PFG->lettre='i';
-  actuel->PFD->PFG->PFD->PFD->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFD->PFD->PFG->PFG->lettre='*'; // Fin de toi*
-  actuel->PFD->PFG->PFD->PFD->PFG->PFD=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFD->PFD->PFG->PFD->lettre='t';
-  actuel->PFD->PFG->PFD->PFD->PFG->PFD->PFG=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFD->PFD->PFG->PFD->PFG->lettre='*'; // Fin de tot*
-  actuel->PFD->PFG->PFD->PFD->PFG->PFD->PFD=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFD->PFD->PFG->PFD->PFD->lettre='u';
-  actuel->PFD->PFG->PFD->PFD->PFG->PFD->PFD->PFG=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFD->PFD->PFG->PFD->PFD->PFG->lettre='t';
-  actuel->PFD->PFG->PFD->PFD->PFG->PFD->PFD->PFG->PFG=Creer_Dictionnaire();
-	actuel->PFD->PFG->PFD->PFD->PFG->PFD->PFD->PFG->PFG->lettre='*';  */
-
 
 	while(continuer != 0){
 		int choix;
@@ -141,6 +52,12 @@ int main(int argc, char *argv[])
 					break;
 
 					case 4:
+            printf("Quel mot voulez-vous tester ?\n");
+            scanf("%s",motATester);
+            if(Appartient_Mot(actuel,motATester, motAffichageTest)==Vrai){
+              printf("Votre mot appartient au dictionnaire actuel !\n");
+            }
+            else printf("Votre mot n'appartient pas au dictionnaire actuel !\n");
 					break;
 
 					case 5:

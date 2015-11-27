@@ -102,10 +102,39 @@ char* Traiter_Dictionnaire(Dictionnaire D,char motActuel[], Booleen save){ // Fo
 
 	return 0;
 }
-Booleen Appartient_Mot(Dictionnaire D,char M[]){ // Pas commencé
+Booleen Appartient_Mot(Dictionnaire D,char M[], char motActuel[]){ // En cours
+	if(D!=NULL){
+		int i = 0;
+		while(motActuel[i]!='\0'){ // On se place à la fin du mot actuel
+			i++;
+		}
+	if(D->lettre!='*'){ // CONDITION IMPORTANTE !!! : Permet de ne pas lire les '*' à la fin des mots // Desactiver pour debug
+			// Ajout de la lettre du noeud actuel
+			motActuel[i] = D->lettre;
+	}
 
-
-
+		if(D->PFG!=NULL){
+			return Appartient_Mot(D->PFG,M,motActuel);
+		}
+		else{ // S'il n'y a pas de fils gauche, c'est qu'on est arrivé au bout d'un mot
+		printf("Mot actuel : %s\n",motActuel);
+		printf("Mot à test : %s\n",M );
+			if(strcmp(M,motActuel)==0){
+				printf("mots identiques\n");
+				 return Vrai;
+			 }
+			motActuel[i]='\0';
+		}
+		if(D->PFD!=NULL){
+			return Appartient_Mot(D->PFD,M,motActuel);
+		}
+		else{
+			// S'il n'y a pas de fils droit, on continue à remonter et enlever un caractère à chaque fois
+			motActuel[i-1]='\0';
+		}
+	}
+	else
+	printf("Dictionnaire vide !\n ");
 	return Faux;
 }
 Booleen Dictionnaire_Vide(Dictionnaire D){ // Pas commencé

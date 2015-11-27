@@ -19,7 +19,7 @@ Dictionnaire Creer_Dictionnaire();
 Dictionnaire Ajouter_Mot(Dictionnaire D, char M[]);
 Dictionnaire Supprimer_Mot(Dictionnaire D,char M[]);
 char* Traiter_Dictionnaire(Dictionnaire D,char motActuel[], Booleen enregistrer);
-Booleen Appartient_Mot(Dictionnaire D,char M[]);
+Booleen Appartient_Mot(Dictionnaire D,char M[], char motActuel[]);
 Booleen Dictionnaire_Vide(Dictionnaire D);
 char * minuscule (char mot[]);
 void enregistrer (char  M[]);
