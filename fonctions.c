@@ -97,6 +97,12 @@ Dictionnaire Supprimer_Mot(Dictionnaire D, char M[]){
 								printf("Remontée : suppression du caractère actuel \n");
 								D=NULL;
 							}
+							else if (D->PFD!=NULL){
+								printf("Remontée : transition du frère droit \n");
+								Dictionnaire transition = Creer_Dictionnaire();
+								transition = D->PFD;
+								D=transition;
+							}
 						}
 					}
 				}
@@ -106,8 +112,14 @@ Dictionnaire Supprimer_Mot(Dictionnaire D, char M[]){
 				printf("Nous sommes arrivés à la fin du mot à supprimer\n");
 				if(D->lettre=='*'){
 					if(D->PFD==NULL){
-						printf("Fin du mot : suppression du caractère actuel \n");
+						printf("Fin du mot : suppression du caractère de fin ('*') \n");
 						D=NULL;
+					}
+					else{
+						printf("Fin du mot : transition du frère droit \n");
+						Dictionnaire transition = Creer_Dictionnaire();
+						transition = D->PFD;
+						D=transition;
 					}
 				}
 			}
@@ -268,7 +280,7 @@ Dictionnaire charger (Dictionnaire D){	// Fonction chargeant un dictionnaire
 	}
 
 	FILE *flo1 = NULL;
-	flo1=fopen("dico.algo","r");	// Ouverture du dictionnaire en lecture seule
+	flo1=fopen("dico.txt","r");	// Ouverture du dictionnaire en lecture seule
 	char TempMot[MAX_LENGTH];		//Mot tempon
 
 	if (flo1 == NULL){

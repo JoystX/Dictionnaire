@@ -69,20 +69,21 @@ int main(int argc, char *argv[]){
 					break;
 
 					case 6:
-            if(fopen("dico.algo" , "r")==NULL){
     					printf("\nSauvegarde du dictionnaire en cours... \n");
     					Traiter_Dictionnaire(actuel,parcoursTrait,Vrai);
-            }else{
-              actuel=charger(actuel);
-              remove("dico.algo");
-              Traiter_Dictionnaire(actuel,parcoursTrait,Vrai);
-            }
 
 					break;
 
 					case 7:
 					printf("\nChargement du dictionnaire en cours... \n");
-          actuel = charger(actuel);
+          if(fopen("dico.algo" , "r")==NULL){
+            printf("\nSauvegarde du dictionnaire en cours... \n");
+            Traiter_Dictionnaire(actuel,parcoursTrait,Vrai);
+          }else{
+            actuel=charger(actuel);
+            remove("dico.algo");
+            Traiter_Dictionnaire(actuel,parcoursTrait,Vrai);
+          }
 					break;
 
 					case 8: printf("\nAu revoir\n");
