@@ -12,56 +12,109 @@ char *fin_du_mot(char mot[], int index){ // Cree une string qui contient la fin 
 Dictionnaire Creer_Dictionnaire(void){ // Fonctionne
 	Dictionnaire D;
 	D = (Dictionnaire)malloc(sizeof(*D));
+	D->lettre='\0';
+	D->PFG=NULL;
+	D->PFD=NULL;
 	return D;
 }
 Dictionnaire Ajouter_Mot(Dictionnaire D, char M[]){ // En cours
-	if(M[0]!='\0'){
-		M=minuscule(M);
-		if(D==NULL){
-			printf("Création noeud\n");
-			D=Creer_Dictionnaire();
+	char motParcours[MAX_LENGTH] = {'\0'};
+	if(!Appartient_Mot(D,M, motParcours)){
+		printf("Cactère actuel : %c (%x)\n",M[0],M[0]);
+		if(M[0]!='\0'){
+			M=minuscule(M);
+			if(D==NULL){
+				printf("Création noeud\n");
+				D=Creer_Dictionnaire();
+			}
+			printf("Ajout de la lettre \"%c\" (%x) dans le noeud \"%c\" (%x)\n", M[0],M[0],D->lettre,	 D->lettre );
+
+			if(D->lettre=='\0'){
+				D->lettre=M[0];
+				printf("Lettre %x ajoutée\n",D->lettre);
+				printf("On ajoute la suite dans le fils gauche\n" );
+				D->PFG=Ajouter_Mot(D->PFG,fin_du_mot(M,1));
+			}
+			else if(M[0]>D->lettre){
+				printf("Lettre plus grande, passage du mot au frère droit\n" );
+				D->PFD=Ajouter_Mot(D->PFD, M);
+			}
+			else if(M[0]<D->lettre){
+				printf("Lettre plus petit, passage du mot à gauche ( on décale tout vers la droite )\n" );
+				Dictionnaire transition = Creer_Dictionnaire();
+				transition->PFD=D;
+				transition->lettre=M[0];
+				D=transition;
+				printf("Ajout de la lettre %x\n",D->lettre);
+				D->PFG=Ajouter_Mot(D->PFG,fin_du_mot(M,1));
+			}
+			else if(M[0]==D->lettre){
+				printf("Même lettre, on passe à la suivante \n");
+				D->PFG=Ajouter_Mot(D->PFG,fin_du_mot(M,1));
+			}
 		}
-		if(D->lettre=='\0'){
-			D->lettre=M[0];
-			printf("Ajout de la lettre %x\n",D->lettre);
-			printf("Ajout du mot %s dans le PFG\n",fin_du_mot(M,1));
-			D->PFG=Ajouter_Mot(D->PFG,fin_du_mot(M,1));
-		}
-		else if(M[0]>D->lettre){
-			printf("Pa1ssage du mot au frère droit\n" );
-			D->PFD=Ajouter_Mot(D->PFD, M);
-		}
-		else if(M[0]<D->lettre){
-			printf("Passage du mot à gauche ( on décale tout vers la droite )\n" );
-			Dictionnaire transition = Creer_Dictionnaire();
-			transition->PFD=D;
-			transition->lettre=M[0];
-			D=transition;
-			printf("Ajout de la lettre %x\n",D->lettre);
-			printf("Ajout du mot %s dans le PFG\n",fin_du_mot(M,1));
-			D->PFG=Ajouter_Mot(D->PFG,fin_du_mot(M,1));
-		}
-		else if(M[0]==D->lettre){
-			printf("Même lettre, on passe à la suivante \n");
-			D->PFG=Ajouter_Mot(D->PFG,fin_du_mot(M,1));
+		else {
+			printf("Nous sommmes arrivés à la fin du mot\n" );
+			if(D==NULL){
+				printf("Création noeud\n");
+				D=Creer_Dictionnaire();
+				printf("Ajout de la lettre \"%c\" (%x) dans le noeud \"%c\" (%x)\n", '*','*',D->lettre,	 D->lettre );
+				D->lettre='*';
+				printf("Lettre %x ajoutée\n",D->lettre);
+			}
+			else{
+				printf("Le noeud existe déjà, passage de celui-ci au frère droit");
+				printf("Noeud actuel : %c (%x)\n",D->lettre,D->lettre);
+
+				Dictionnaire transition = Creer_Dictionnaire();
+				transition->PFD=D;
+				transition->lettre='*';
+				D=transition;
+			}
 		}
 	}
-	else {
-		if(D==NULL){
-			D=Creer_Dictionnaire();
-			D->lettre='*';
-			printf("Ajout de la lettre %x\n",D->lettre);
-		}
-		else{
-			Dictionnaire transition = Creer_Dictionnaire();
-			transition->PFD=D;
-			transition->lettre='*';
-			D=transition;
-		}
+	else{
+		printf("Le mot existe déjà\n");
 	}
 	return D;
 }
-Dictionnaire Supprimer_Mot(Dictionnaire D,char M[]){
+Dictionnaire Supprimer_Mot(Dictionnaire D, char M[]){
+	if(D!=NULL){
+			if(M[0]!='\0'){
+				printf("Caractère actuel : %c (%x)",D->lettre,D->lettre);
+				char motAppartient[MAX_LENGTH] = { '\0' };
+				if(Appartient_Mot(D,M,motAppartient)){
+					if(M[0]>D->lettre){
+						printf("Lettre plus grande, passage du mot au frère droit\n" );
+						D->PFD=Supprimer_Mot(D->PFD, M);
+					}
+					else if(M[0]==D->lettre){
+						printf("Même lettre, on passe au fils \n");
+						D->PFG=Supprimer_Mot(D->PFG,fin_du_mot(M,1));
+						if(D!=NULL){
+							printf("Caractère actuel : %c (%x)",D->lettre,D->lettre);
+							if(D->PFD==NULL && D->PFG==NULL){
+								printf("Remontée : suppression du caractère actuel \n");
+								D=NULL;
+							}
+						}
+					}
+				}
+				else printf("Le dictionnaire ne contient pas ce mot !\n");
+			}
+			else{
+				printf("Nous sommes arrivés à la fin du mot à supprimer\n");
+				if(D->lettre=='*'){
+					if(D->PFD==NULL){
+						printf("Fin du mot : suppression du caractère actuel \n");
+						D=NULL;
+					}
+				}
+			}
+	}
+	else
+	printf("Le dictionnaire n'existe pas !\n ");
+
 	return D;
 }
 char* Traiter_Dictionnaire(Dictionnaire D,char motActuel[], Booleen save){ // Fonctionne
@@ -174,32 +227,45 @@ char * minuscule (char mot[]){ // Focntion vérifiant les mots entrés par l'uti
 		}
 	}
 	i++;
-}
-
-
-
-
-return mot;
+	}
+	return mot;
 }
 
 void enregistrer (char  M[]){ // Fonction d'enregistrement du dictionnaire
 
 	FILE *flo1 = NULL;
-flo1 = fopen("dico.algo", "a+");	// On ouvre le fichier en fin de curseur
+	flo1 = fopen("dico.algo", "a+");	// On ouvre le fichier en fin de curseur
 
-if ( flo1 == NULL)
-{
-	printf(" Le dictionnaire ne peut être enregistré.\n");	// Si le fichier n'est pas accessible
-    exit(2);
-}
-else{
-	printf("Mot enregistré : %s \n",M);	// Sinon, on enregistre le mot
-	fprintf(flo1,"%s\n",M);	// Ajout du mot
+	if ( flo1 == NULL)
+	{
+		printf(" Le dictionnaire ne peut être enregistré.\n");	// Si le fichier n'est pas accessible
 	}
-	fclose(flo1);	// On referme le flux
+	else{
+		printf("Mot enregistré : %s \n",M);	// Sinon, on enregistre le mot
+		fprintf(flo1,"%s\n",M);	// Ajout du mot
+		}
+		fclose(flo1);	// On referme le flux
 }
 
-void charger (Dictionnaire D){	// Fonction chargeant un dictionnaire
+Dictionnaire charger (Dictionnaire D){	// Fonction chargeant un dictionnaire
+	if(D->lettre!='\0'){
+		int choix=0;
+		while(choix==0){
+			printf("Votre dictionnaire n'est pas vide. Voulez-vous l'écraser lors du chargement ou fusionner les deux ?\n");
+			printf("1- Ecraser le dictionnaire actuel\n");
+			printf("2- Fusionner le dictionnaire actuel et celui contenu dans le fichier\n");
+			scanf("%d",&choix);
+			if(choix==1){
+				D=Creer_Dictionnaire();
+			}
+			else if(choix==2){
+
+			}else{
+				printf("Choix invalide\n");
+				choix=0;
+			}
+		}
+	}
 
 	FILE *flo1 = NULL;
 	flo1=fopen("dico.algo","r");	// Ouverture du dictionnaire en lecture seule
@@ -210,14 +276,26 @@ void charger (Dictionnaire D){	// Fonction chargeant un dictionnaire
 	}
 	else{
 
-	while (fscanf(flo1,"%s",TempMot) == 1)			// Tant que l'on est pas arrivé à la fin de fichier
-	{
-	               		// On lis la chaîne de caractère et on déplace le curseur à la fin
-								 printf("Transfert du mot %s dans le dictionnaire actuel\n",TempMot);
-								 Ajouter_Mot(D, TempMot);			// On ajoute alors le mot au dictionnaire
-	               printf(" Le mot %s à été chargé. \n", TempMot);
+		while (fgets(TempMot, MAX_LENGTH, flo1) != NULL )			// Tant que l'on est pas arrivé à la fin de fichier
+		{
+
+									int j=0;
+									printf("Mot à ajouter : \n");
+									for(j=0;j<MAX_LENGTH;j++){
+										if(TempMot[j]=='\n'){
+											//printf("Retour chariot trouvé\n" );
+											TempMot[j]='\0';
+										}
+										printf("%c(%x)",TempMot[j],TempMot[j]);
+									}
+									printf("\n");
+		               		// On lis la chaîne de caractère et on déplace le curseur à la fin
+									 printf("\nTransfert du mot %s dans le dictionnaire actuel\n\n",TempMot);
+									 D=Ajouter_Mot(D, TempMot);			// On ajoute alors le mot au dictionnaire
+		               printf("\nLe mot %s a été chargé. \n\n", TempMot);
+		}
+		fclose(flo1);	// On ferme le flux
 	}
-	fclose(flo1);	// On ferme le flux
-	}
+	return D;
 
 }
